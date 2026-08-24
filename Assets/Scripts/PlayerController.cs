@@ -115,8 +115,9 @@ namespace Platformer
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Enemy"));
+            if (other.gameObject.CompareTag("Enemy"))
             {
+                Debug.Log($"Player collided with: {other.gameObject.name}, tag: {other.gameObject.tag}");
                 Die();
             }
             
