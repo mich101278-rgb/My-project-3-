@@ -66,6 +66,7 @@ namespace Platformer
             ForceMode2D.Impulse
         );
                 animator.SetTrigger("Jump");
+
             }
 
             _jumpRequested = false;
