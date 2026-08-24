@@ -54,8 +54,10 @@ namespace Platformer
                     moveInput.x * movingSpeed,
                     rigidbody.linearVelocity.y
                     );
-            
-            
+
+            float speed = Mathf.Abs(moveInput.x);
+
+            animator.SetFloat("Speed", speed);
 
             if (_jumpRequested && IsGrounded())
             {
@@ -63,21 +65,11 @@ namespace Platformer
             Vector2.up * jumpForce,
             ForceMode2D.Impulse
         );
+                animator.SetTrigger("Jump");
             }
 
             _jumpRequested = false;
-            if (!isGrounded)
-            {
-                animator.SetInteger("playerState", 2);
-            }
-            else if (Mathf.Abs(moveInput.x) > 0.01f)
-            {
-                animator.SetInteger("playerState", 1);
-            }
-            else
-            {
-                animator.SetInteger("playerState", 0);
-            }
+
 
             if (!facingRight && moveInput.x > 0.01f)
             {
