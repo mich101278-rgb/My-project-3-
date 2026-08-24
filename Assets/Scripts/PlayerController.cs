@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,15 @@ namespace Platformer
 {
     public class PlayerController : MonoBehaviour
     {
+        public event Action Died;
+        public GameObject deathPrefab;
         public float movingSpeed;
         public float jumpForce;
         private Vector2 moveInput;
 
         private bool facingRight = false;
         [HideInInspector]
-        public bool deathState = false;
+        public bool isDied = false;
 
         private bool _jumpRequested;
 
@@ -23,6 +26,19 @@ namespace Platformer
         private Rigidbody2D rigidbody;
         private Animator animator;
         private GameManager gameManager;
+
+        private void Die()
+        {
+            if (isDied)
+            {
+                return;
+            }
+            isDied = true;
+            GameObject deathPlayer = (GameObject)Instantiate(deathPrefab, transform.position, transform.rotation);
+            deathPlayer.transform.localScale = transform.localScale;
+            gameObject.SetActive (false);
+            Died?.Invoke();
+        }
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
@@ -99,14 +115,11 @@ namespace Platformer
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.tag == "Enemy")
+            if (other.gameObject.CompareTag("Enemy"));
             {
-                deathState = true; // Say to GameManager that player is dead
+                Die();
             }
-            else
-            {
-                deathState = false;
-            }
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)

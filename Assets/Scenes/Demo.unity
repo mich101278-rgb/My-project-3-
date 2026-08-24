@@ -20877,6 +20877,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6952628394585513909, guid: a3dc7dd79a2fbc341a3fc828503f1ca9, type: 3}
+      propertyPath: deathPrefab
+      value: 
+      objectReference: {fileID: 1904219114179032792, guid: 798a6396cbec6cc4bbf4c6447558fad6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
